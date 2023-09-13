@@ -1,0 +1,32 @@
+<form [formGroup]="form">
+    <div class="mb-3">
+        <label for="id" class="form-label">Id</label>
+        <input  type="text"  class="form-control" id="id" placeholder="currency id" formControlName="cryptoId"/>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input  type="text" class="form-control" id="name" placeholder="currency name" formControlName="cryptoName" required/>
+        <div *ngIf="form.controls['cryptoName'].invalid && (form.controls['cryptoName'].dirty || form.controls['cryptoName'].touched)" class="alert alert-danger">
+            <div *ngIf="form.controls['cryptoName'].errors?.['required']">
+                Name is required.
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="value" class="form-label">Value</label>
+        <input   type="number"  class="form-control" id="value" placeholder="0.00" formControlName="cryptoValue" required/>
+        <div *ngIf="form.controls['cryptoValue'].invalid && (form.controls['cryptoValue'].dirty || form.controls['cryptoValue'].touched)" class="alert alert-danger">
+            <div *ngIf="form.controls['cryptoValue'].errors?.['required']">
+                Value is required.
+            </div>
+        </div>
+    </div>
+</form>
+    
+    
+
+
+
+
+
+

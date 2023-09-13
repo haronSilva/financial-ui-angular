@@ -1,0 +1,62 @@
+<div class="card">
+    <table class="table table-striped-columns table-warning">
+        <thead>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>VALUE</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let crypto of cryptocurrencies">
+                <td>{{crypto.id}}</td>
+                <td>{{crypto.name}}</td>
+                <td>{{crypto.value}}</td>
+                <td>
+                  <button pButton type="button" icon="pi pi-pencil" (click)="onEdit(crypto.id)" class="p-button-raised p-button-rounded"></button>
+                  <button pButton type="button" icon="pi pi-trash" (click)="onDelete(crypto.id)" class="p-button-raised p-button-rounded"></button>
+                </td>    
+            </tr>
+            
+        </tbody>
+    </table>
+    
+</div>
+
+<p-dialog header="Crypto Currency" [(visible)]="display">
+
+    <ng-container [formGroup]="userForm">
+      <currency-details formGroupName="cryptoForm"/>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+      <p-button icon="pi pi-minus" (click)="display=false" label="Cancel" styleClass="p-button-text"></p-button>
+      <p-button icon="pi pi-check" (click)="save()" label="Salvar" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-button (click)="showDialog()" icon="pi pi-bitcoin" label="New"></p-button>
+
+<p-toast key="normalMessage" position="bottom-right"></p-toast>
+
+<p-toast position="bottom-center" key="confirmationMessage" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+          <div class="p-text-center">
+              <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+              <h4>{{message.summary}}</h4>
+              <p>{{message.detail}}</p>
+          </div>
+          <div class="p-grid p-fluid">
+              <div class="p-col-6">
+                  <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+              </div>
+              <div class="p-col-6">
+                  <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+              </div>
+          </div>
+      </div>
+  </ng-template>
+</p-toast>
+
+
+
